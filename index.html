@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Домашняя страница личной интеграции rclone с Google Drive.">
+    <title>rclone · Google Drive</title>
+    <style>
+      :root {
+        --ink: #14213d;
+        --muted: #526174;
+        --blue: #2878e8;
+        --blue-dark: #1455b2;
+        --paper: #f7faff;
+        --line: #dce5f2;
+        --orange: #ffbd59;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font: 16px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      a { color: inherit; }
+      .wrap { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+      header { padding: 24px 0; }
+      nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+      .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -.02em; text-decoration: none; }
+      .mark { display: grid; place-items: center; width: 34px; height: 34px; color: white; background: var(--blue); border-radius: 10px; font-size: 20px; }
+      .nav-link { color: var(--muted); font-size: 14px; font-weight: 650; text-underline-offset: 4px; }
+      .hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 64px; align-items: center; padding: 76px 0 86px; }
+      .eyebrow { margin: 0 0 16px; color: var(--blue-dark); font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+      h1 { max-width: 720px; margin: 0; font-size: clamp(42px, 6vw, 72px); line-height: 1.02; letter-spacing: -.055em; }
+      .lead { max-width: 590px; margin: 25px 0 0; color: var(--muted); font-size: 20px; }
+      .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 31px; }
+      .button { display: inline-block; padding: 12px 18px; border-radius: 10px; background: var(--blue); color: white; font-weight: 750; text-decoration: none; box-shadow: 0 8px 20px rgb(40 120 232 / 20%); }
+      .button:hover { background: var(--blue-dark); }
+      .note { display: inline-flex; align-items: center; padding: 12px 3px; color: var(--muted); font-size: 14px; font-weight: 650; }
+      .cloud-card { position: relative; min-height: 286px; overflow: hidden; border: 1px solid var(--line); border-radius: 28px; background: linear-gradient(145deg, #fff 10%, #e4f0ff); box-shadow: 0 25px 60px rgb(30 75 135 / 12%); }
+      .cloud { position: absolute; top: 88px; left: 18%; width: 235px; height: 97px; border-radius: 90px; background: white; box-shadow: 0 11px 22px rgb(49 97 151 / 12%); }
+      .cloud::before, .cloud::after { position: absolute; content: ""; border-radius: 50%; background: white; }
+      .cloud::before { width: 108px; height: 108px; bottom: 0; left: 35px; }
+      .cloud::after { width: 72px; height: 72px; bottom: 0; right: 33px; }
+      .arrow { position: absolute; top: 117px; right: 15%; z-index: 1; width: 65px; height: 65px; border-radius: 50%; background: var(--orange); color: var(--ink); font-size: 38px; font-weight: 400; line-height: 58px; text-align: center; }
+      .card-label { position: absolute; bottom: 22px; left: 25px; color: var(--blue-dark); font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+      section.info { padding: 70px 0 88px; background: white; border-top: 1px solid var(--line); }
+      h2 { margin: 0; font-size: clamp(28px, 3.5vw, 40px); letter-spacing: -.04em; }
+      .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 31px; }
+      .item { padding: 25px; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+      .number { color: var(--blue); font-size: 13px; font-weight: 850; letter-spacing: .08em; }
+      h3 { margin: 12px 0 7px; font-size: 18px; }
+      .item p { margin: 0; color: var(--muted); font-size: 15px; }
+      footer { padding: 29px 0; color: var(--muted); font-size: 14px; }
+      footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+      footer a { text-underline-offset: 3px; }
+      @media (max-width: 720px) {
+        .hero { grid-template-columns: 1fr; gap: 38px; padding: 48px 0 58px; }
+        .cloud-card { min-height: 230px; }
+        .cloud { transform: scale(.78); transform-origin: left center; left: 12%; top: 69px; }
+        .arrow { top: 94px; right: 11%; }
+        .grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="wrap">
+      <nav aria-label="Основная навигация">
+        <a class="brand" href="./"><span class="mark" aria-hidden="true">↗</span>rclone / Drive</a>
+        <a class="nav-link" href="privacy.html">Конфиденциальность</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="wrap hero">
+        <div>
+          <p class="eyebrow">Личная интеграция</p>
+          <h1>Подключение rclone к Google Drive</h1>
+          <p class="lead">Эта страница описывает личное OAuth-приложение для безопасной авторизации rclone в Google Drive.</p>
+          <div class="actions">
+            <a class="button" href="https://rclone.org/drive/" rel="noopener">Инструкция rclone</a>
+            <a class="note" href="privacy.html">Политика конфиденциальности →</a>
+          </div>
+        </div>
+        <div class="cloud-card" aria-hidden="true">
+          <div class="cloud"></div><div class="arrow">↑</div><span class="card-label">Google Drive</span>
+        </div>
+      </div>
+
+      <section class="info" aria-labelledby="purpose">
+        <div class="wrap">
+          <p class="eyebrow">Как это работает</p>
+          <h2 id="purpose">Только для владельца приложения</h2>
+          <div class="grid">
+            <article class="item"><span class="number">01</span><h3>Вы авторизуетесь</h3><p>Вход выполняется в окне Google. Пароль Google этой странице и rclone не передаётся.</p></article>
+            <article class="item"><span class="number">02</span><h3>rclone получает доступ</h3><p>После согласия Google выдаёт токен доступа, необходимый для работы с выбранным Google Drive.</p></article>
+            <article class="item"><span class="number">03</span><h3>Данные остаются вашими</h3><p>Сайт не собирает файлы, не ведёт аналитику и не предоставляет доступ третьим лицам.</p></article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap"><span>rclone × Google Drive · личное приложение</span><a href="privacy.html">Политика конфиденциальности</a></div>
+    </footer>
+  </body>
+</html>
